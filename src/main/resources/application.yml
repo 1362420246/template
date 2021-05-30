@@ -1,0 +1,27 @@
+server:
+  port: 9999
+  tomcat:
+    accept-count: 2000
+    max-connections: 10000
+    threads:
+      max: 800
+      min-spare: 200
+
+spring:
+  application:
+    name: temp
+  profiles:
+    active: @profileActive@
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+    cache-duration: 7200s
+  servlet:
+    multipart:
+      # 单个文件的最大值
+      max-file-size: 100MB
+      #上传文件总的最大值
+      max-request-size: 100MB

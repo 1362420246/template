@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!--项目名称-->
+    <property name="ITEM_NAME" value="temp"/>
+
+    <!--  日志目录  -->
+    <springProperty name="LOG_PATH" scope="context" source="log.path"/>
+
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%p}) %clr(${PID:--}){magenta} %clr(%X{PtxId:--}){faint} %clr(%X{PspanId:--}){faint} %clr(%t){faint} %clr(%logger){cyan} %clr(%L){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <property name="FILE_LOG_PATTERN"
+              value="${FILE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%p} ${PID:--} %X{PtxId:--} %X{PspanId:--} %t %logger %L %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <!-- Console 输出设置 -->
+    <appender name="CONSOLE" target="SYSTEM_OUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 普通日志 -->
+    <include resource="logging/file-appender.xml"/>
+    <!-- 请求日志 -->
+    <include resource="logging/request-logging-file-appender.xml"/>
+    <!-- sql日志 -->
+    <include resource="logging/sql-logging-file-appender.xml"/>
+
+    <!-- Spring框架的日志输出 -->
+    <logger name="org.springframework" level="ERROR"/>
+
+    <!-- 项目日志输出等级 -->
+    <logger name="com.qbk" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_INFO"/>
+        <appender-ref ref="FILE_DEBUG"/>
+        <appender-ref ref="FILE_WARN"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/temp?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+
+mybatis-plus:
+  type-aliases-package: com.qbk.domain
+  mapper-locations:  classpath*:/mapperxml/*.xml
+
+log:
+  path: ../logs/temp
